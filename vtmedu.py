@@ -20,7 +20,7 @@ print("""
 """)
 
 
-API_KEY = ' api buraya'
+API_KEY = ''
 
 # Dosya taraması işlevi
 def dosya_tara(dosya):
