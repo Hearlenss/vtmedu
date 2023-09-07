@@ -2,7 +2,7 @@ import requests
 import os
 
 
-os.system("clear") # eğer windows kullanıyorsanız lütfen burayı os.system("cls") olarak düzenleyin yoksa terminali temizlemez linux ve mac için kalabilir.
+os.system("clear") # windows kullanıcılar (clear) kısmını (cls) olarak düzenlemeli aksi taktirde silmez. Linux ve macos için durabilir.
 
 
 print("""
@@ -20,14 +20,18 @@ print("""
 """)
 
 
-API_KEY = 'api buraya v2'
+API_KEY = ' api buraya'
 
-
+# Dosya taraması işlevi
 def dosya_tara(dosya):
-    # dosya yolu doğrumu 
+    if not API_KEY:
+        print("Hata: API anahtarı eksik veya yanlış. Lütfen geçerli bir API anahtarı ayarlayın.")
+        return None
+
     if not os.path.exists(dosya):
         print(f"{dosya} adlı dosya bulunamadı. Lütfen dosya yolunu kontrol edin.")
         return None
+
 
     url = 'https://www.virustotal.com/vtapi/v2/file/scan'
     params = {'apikey': API_KEY}
@@ -37,7 +41,8 @@ def dosya_tara(dosya):
         dosyalar = None
     else:
         dosyalar = {'file': (dosya, open(dosya, 'rb'))}
-             
+    
+    # Dosya taramasını gerçekleştir ve sonuçları al
     yanıt = requests.post(url, files=dosyalar, params=params)
     sonuç = yanıt.json()
 
@@ -45,6 +50,9 @@ def dosya_tara(dosya):
 
 
 def hash_değerini_tara(hash_değeri):
+    if not API_KEY:
+        print("Hata: API anahtarı eksik veya yanlış. Lütfen geçerli bir API anahtarı ayarlayın.")
+        return None
     url = f'https://www.virustotal.com/vtapi/v2/file/report'
     params = {'apikey': API_KEY, 'resource': hash_değeri}    
     yanıt = requests.get(url, params=params)
@@ -106,3 +114,4 @@ if __name__ == '__main__':
             break
         else:
             print("Geçerli bir seçenek seçilmedi.")
+
