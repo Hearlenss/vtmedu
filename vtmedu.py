@@ -52,9 +52,9 @@ def sonucunu_yazdır(sonuç):
         for antivirus, sonuç in taramalar.items():
             print(f"{antivirus}: {sonuç.get('result', 'N/A')}")
     else:
-        print("Sonuç henüz hazır değil, lütfen bir süre sonra tekrar deneyin.")
+        print("Sonuç henüz hazırlanıyor. Biraz sonra lütfen tekrar deneyin.")
 
-# yazılan hash değerleri
+# yazılan hash değerleri ve scan id
 def dosya_sonucunu_yazdır(sonuç):
     print("\nHash Değerleri:")
     print(f"Scan ID: {sonuç.get('scan_id', 'N/A')}")
