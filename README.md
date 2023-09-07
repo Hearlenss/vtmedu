@@ -1,11 +1,13 @@
 # VTMedu (Virüs Totel Analiz Aracı)
 Amacı belli bir dosya veya hash değerini siteye girmeden tool ile halledebilmektir.
-# İndirme 
-    git clone https://github.com/Hearlenss/vtmedu.git
-    pip3 install requirements.txt
+# Uyarı
+Virüs Totel'in sitesinden api key alıp yerleştirmeyi unutmayın aksi halde hata verir ve çalışmaz.
+Hesap oluşturup profil kısmından alabilirsiniz
 # Kullanım 
-     cd vtmedu 
-     python3 vtmedu.py 
+     git clone https://github.com/Hearlenss/vtmedu.git
+    pip3 install requirements.txt
+    cd vtmedu 
+    python3 vtmedu.py 
 Virüs Totel sitesinden api key alıp eklemeyi unutmayın.
 # Verdiği Bilgiler
 Gerekli olan hash değerleri , analiz sonucu süpheli dosyaları , permalink , scan id.
