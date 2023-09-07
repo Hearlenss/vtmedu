@@ -4,6 +4,7 @@ Amacı belli bir dosya veya hash değerini siteye girmeden tool ile halledebilme
     git clone https://github.com/Hearlenss/vtmedu.git
     pip3 install requirements.txt
 # Kullanım 
+Virüs Totel sitesinden api key alıp eklemeyi unutmayın.
     cd vtmedu 
     python3 vtmedu.py 
 # Verdiği Bilgiler
