@@ -2,7 +2,7 @@ import requests
 import os
 
 # Terminal ekranını temizle
-os.system("clear")
+os.system("clear") #eğer windows kullanıyorsanız burayı os.system("cls") şeklinde güncellemelisiniz aksi halde temizlemez linux ve macos bu şekilde kalabilir.
 print("""
          _________ _______  _______  ______           
 |\     /|\__   __/(       )(  ____ \(  __  \ |\     /|
