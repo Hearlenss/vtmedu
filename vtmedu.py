@@ -1,8 +1,10 @@
 import requests
 import os
 
-# Terminal ekranını temizle
-os.system("clear") #eğer windows kullanıyorsanız burayı os.system("cls") şeklinde güncellemelisiniz aksi halde temizlemez linux ve macos bu şekilde kalabilir.
+
+os.system("clear") # eğer windows kullanıyorsanız lütfen burayı os.system("cls") olarak düzenleyin yoksa terminali temizlemez linux ve mac için kalabilir.
+
+
 print("""
          _________ _______  _______  ______           
 |\     /|\__   __/(       )(  ____ \(  __  \ |\     /|
@@ -17,14 +19,16 @@ print("""
 ---------'REDLİNE--------------------'MEDUSA----------
 """)
 
-API_KEY = 'api key buraya'
+
+API_KEY = 'api buraya v2'
+
 
 def dosya_tara(dosya):
-    # dosya yolunu kontrol eder
+    # dosya yolu doğrumu 
     if not os.path.exists(dosya):
         print(f"{dosya} adlı dosya bulunamadı. Lütfen dosya yolunu kontrol edin.")
         return None
-    #api endpointler
+
     url = 'https://www.virustotal.com/vtapi/v2/file/scan'
     params = {'apikey': API_KEY}
     if dosya.startswith("http") or dosya.startswith("www"):
@@ -33,28 +37,36 @@ def dosya_tara(dosya):
         dosyalar = None
     else:
         dosyalar = {'file': (dosya, open(dosya, 'rb'))}
+             
     yanıt = requests.post(url, files=dosyalar, params=params)
     sonuç = yanıt.json()
+
     return sonuç
 
-# Hash değerini tarama 
+
 def hash_değerini_tara(hash_değeri):
     url = f'https://www.virustotal.com/vtapi/v2/file/report'
     params = {'apikey': API_KEY, 'resource': hash_değeri}    
     yanıt = requests.get(url, params=params)
     sonuç = yanıt.json()
-    return sonuç
+    
+    if sonuç.get('response_code', 0) == 0:
+        print("Hash değeri bulunamadı veya sonuç henüz hazır değil.")
+
 
 def sonucunu_yazdır(sonuç):
+    if sonuç is None:
+        print("Dosya veya hash değeri bulunamadı veya sonuç henüz hazır değil.")
+        return
     if sonuç.get('response_code', 0) == 1:
         print("Sonuçlar:")
         taramalar = sonuç.get('scans', {})
         for antivirus, sonuç in taramalar.items():
             print(f"{antivirus}: {sonuç.get('result', 'N/A')}")
     else:
-        print("Sonuç henüz hazırlanıyor. Biraz sonra lütfen tekrar deneyin.")
+        print("Sonuç henüz hazır değil, lütfen bir süre sonra tekrar deneyin.")
 
-# yazılan hash değerleri ve scan id
+
 def dosya_sonucunu_yazdır(sonuç):
     print("\nHash Değerleri:")
     print(f"Scan ID: {sonuç.get('scan_id', 'N/A')}")
